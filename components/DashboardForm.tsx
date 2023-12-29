@@ -31,7 +31,6 @@ const DashboardForm = ({ session }: { session: Session | null }) => {
 			}
 
 			if (data) {
-				console.log(data);
 				setFullname(data.full_name);
 				setUsername(data.username);
 				setWebsite(data.website);

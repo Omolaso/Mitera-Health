@@ -4,8 +4,10 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
+import GetOrigin from "@/utils/GetOrigin";
 
 export default function AuthForm() {
+	const currentOrigin = GetOrigin();
 	const supabase = createClientComponentClient<Database>();
 
 	return (
@@ -16,8 +18,7 @@ export default function AuthForm() {
 			theme="dark"
 			showLinks={false}
 			providers={[]}
-			redirectTo="http://localhost:3000/auth/callback"
-			// redirectTo={`${url.origin}/auth/callback`}
+			redirectTo={`${currentOrigin}/auth/callback`}
 		/>
 	);
 }

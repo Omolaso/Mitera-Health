@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Step from './Step'
+import Step from '../components/Step'
 import Code from '@/components/Code'
 
 const create = `

@@ -1,4 +1,4 @@
-import Step from './Step'
+import Step from '../components/Step'
 
 export default function ConnectSupabaseSteps() {
   return (

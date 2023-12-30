@@ -37,6 +37,9 @@ const DashboardForm = ({ session }: { session: Session | null }) => {
 				setFullname(data.full_name);
 				setUsername(data.username);
 			}
+			if (data?.full_name) {
+				router.push("/dashboard");
+			}
 		} catch (error) {
 			alert("Error loading user data!");
 		} finally {
@@ -48,12 +51,12 @@ const DashboardForm = ({ session }: { session: Session | null }) => {
 		getProfile();
 	}, [user, getProfile]);
 
-	async function updateProfile({
+	const updateProfile = async ({
 		username,
 	}: {
 		username: string | null;
 		fullname: string | null;
-	}) {
+	}) => {
 		try {
 			setLoading(true);
 
@@ -73,7 +76,7 @@ const DashboardForm = ({ session }: { session: Session | null }) => {
 		} finally {
 			setLoading(false);
 		}
-	}
+	};
 
 	const profileUpdate = () => {
 		if (!fullname || !username || !session?.user.email) return;

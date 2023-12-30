@@ -36,18 +36,35 @@ const contactUsStyles = {
 	width: "100%",
 };
 
-const DashboardMainContent = ({ fullname }: { fullname: string | null }) => {
+interface IProps {
+	fullname: string | null;
+	loading: boolean;
+}
+
+const DashboardMainContent = (props: IProps) => {
 	return (
 		<div className="flex flex-col items-stretch justify-between w-full gap-4">
-			<div className="flex flex-col items-start gap-4 min-h-[10rem] md:min-h-[15rem] bg-lightGreen rounded-[1rem] w-full p-5">
-				<h2 className="font-bold text-[1.5rem] md:text-[2.5rem] text-blue">
-					Welcome, {fullname}
-				</h2>
-				<div className="bg-grey p-3 rounded-[1rem] w-full max-w-full md:max-w-[60%]">
-					<span className="font-normal text-base text-green w-full">
-						Have a nice day and don't forget to take care of your health.
-					</span>
-				</div>
+			<div
+				className={
+					props.loading
+						? "flex items-center justify-center gap-4 min-h-[10rem] md:min-h-[15rem] bg-lightGreen rounded-[1rem] w-full p-5"
+						: "flex flex-col items-start gap-4 min-h-[10rem] md:min-h-[15rem] bg-lightGreen rounded-[1rem] w-full p-5"
+				}
+			>
+				{props.loading ? (
+					<span className="font-bold text-[1.5rem] text-blue">Fetching...</span>
+				) : (
+					<>
+						<h2 className="font-bold text-[1.5rem] md:text-[2.5rem] text-blue">
+							Welcome, {props.fullname}
+						</h2>
+						<div className="bg-grey p-3 rounded-[1rem] w-full max-w-full md:max-w-[60%]">
+							<span className="font-normal text-base text-green w-full">
+								Have a nice day and don't forget to take care of your health.
+							</span>
+						</div>
+					</>
+				)}
 			</div>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-4 w-full">

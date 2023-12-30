@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { Database } from "@/types/supabase";
 import {
 	User,
@@ -34,9 +35,8 @@ interface IProps {
 	url: string | null;
 	fullname: string | null;
 	username: string | null;
-	loading: boolean;
-	setAvatarUrl: any;
-	setLoading: any;
+	setAvatarUrl: Dispatch<SetStateAction<string | null>>;
+	setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const DashboardMainContentSidebar = (props: IProps) => {

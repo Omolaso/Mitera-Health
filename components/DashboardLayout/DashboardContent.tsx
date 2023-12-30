@@ -17,7 +17,7 @@ import { navLinks, INavProps } from "./DashboardSidebar";
 
 const DashboardContent = ({ session }: { session: Session | null }) => {
 	const [modal, setModal] = useState<boolean>(false);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState<boolean>(true);
 	const [fullname, setFullname] = useState<string | null>(null);
 	const [username, setUsername] = useState<string | null>(null);
 	const [avatar_url, setAvatarUrl] = useState<string | null>(null);
@@ -60,96 +60,85 @@ const DashboardContent = ({ session }: { session: Session | null }) => {
 	}, [user, getProfile]);
 
 	return (
-		<>
-			{/* {loading ? (
-				<div className="flex items-center justify-center min-h-screen">
-					<span className="font-bold text-[1.5rem] md:text-[2.5rem] text-blue">
-						Loading your dashboard...
-					</span>
-				</div>
-			) : ( */}
-			<section className="flex items-stretch justify-center min-h-screen bg-grey w-full">
-				<div className="relative flex flex-row items-stretch justify-between gap-4 w-full max-w-[100rem] p-4">
-					<div className="flex-[0.2] hidden md:flex items-stretch">
-						<DashboardSidebar />
-					</div>
-
-					<div className="flex-[1] flex flex-col items-start justify-center">
-						<div className="flex flex-row gap-4 items-center justify-between bg-transparent border-b border-deepGrey w-full py-4">
-							<h1 className=" text-green text-lg font-semibold">Dashboard</h1>
-
-							<button
-								type="button"
-								onClick={() => setModal(true)}
-								className="block md:hidden"
-							>
-								<RiMenu4Fill className="text-green font-bold w-10 h-10" />
-							</button>
-						</div>
-
-						<div className=" py-3 flex-1 flex flex-col md:flex-row gap-4 w-full">
-							<div className="flex-1 flex items-stretch">
-								<DashboardMainContent fullname={fullname} />
-							</div>
-
-							<div className="flex-[0.4] flex items-stretch">
-								<DashboardMainContentSidebar
-									user={user}
-									fullname={fullname}
-									username={username}
-									url={avatar_url}
-									loading={loading}
-									setLoading={setLoading}
-									setAvatarUrl={setAvatarUrl}
-								/>
-							</div>
-						</div>
-					</div>
+		<section className="flex items-stretch justify-center min-h-screen bg-grey w-full">
+			<div className="relative flex flex-row items-stretch justify-between gap-4 w-full max-w-[100rem] p-4">
+				<div className="flex-[0.2] hidden md:flex items-stretch">
+					<DashboardSidebar />
 				</div>
 
-				{/*NAVS MOBILE VIEW */}
+				<div className="flex-[1] flex flex-col items-start justify-center">
+					<div className="flex flex-row gap-4 items-center justify-between bg-transparent border-b border-deepGrey w-full py-4">
+						<h1 className=" text-green text-lg font-semibold">Dashboard</h1>
 
-				<div
-					className={
-						modal
-							? "fixed z-50 right-0 top-0 h-full bg-lightGreen flex flex-col justify-between flex-[0.3] w-full duration-500 ease-in-out p-4"
-							: "fixed z-50 right-[-100%] h-full top-0 bg-lightGreen flex flex-col justify-between flex-[0.3] w-full duration-500 ease-in-out p-4"
-					}
-				>
-					<div className="flex flex-col gap-8">
 						<button
 							type="button"
-							onClick={() => setModal(false)}
-							className="self-end"
+							onClick={() => setModal(true)}
+							className="block md:hidden"
 						>
-							<AiOutlineClose className="text-blue font-bold w-8 h-8" />
+							<RiMenu4Fill className="text-green font-bold w-10 h-10" />
 						</button>
-						<ul className="flex flex-col gap-8 text-lg">
-							{navLinks.slice(1, navLinks.length).map((navLink: INavProps) => (
-								<li key={navLink.name} className="w-full min-h-[2.5rem]">
-									<Link
-										href={navLink.path}
-										onClick={() => setModal(false)}
-										className="text-blue font-medium text-lg"
-									>
-										{navLink.name}
-									</Link>
-								</li>
-							))}
-						</ul>
-						<form action="/auth/signout" method="post">
-							<button
-								className="bg-green p-3 rounded-[0.5rem] cursor-pointer text-white"
-								type="submit"
-							>
-								Sign out
-							</button>
-						</form>
+					</div>
+
+					<div className=" py-3 flex-1 flex flex-col md:flex-row gap-4 w-full">
+						<div className="flex-1 flex items-stretch">
+							<DashboardMainContent loading={loading} fullname={fullname} />
+						</div>
+
+						<div className="flex-[0.4] flex items-stretch">
+							<DashboardMainContentSidebar
+								user={user}
+								fullname={fullname}
+								username={username}
+								url={avatar_url}
+								setLoading={setLoading}
+								setAvatarUrl={setAvatarUrl}
+							/>
+						</div>
 					</div>
 				</div>
-			</section>
-			{/* )} */}
-		</>
+			</div>
+
+			{/*NAVS MOBILE VIEW */}
+
+			<div
+				className={
+					modal
+						? "fixed z-50 right-0 top-0 h-full bg-lightGreen flex flex-col justify-between flex-[0.3] w-full duration-500 ease-in-out p-4"
+						: "fixed z-50 right-[-100%] h-full top-0 bg-lightGreen flex flex-col justify-between flex-[0.3] w-full duration-500 ease-in-out p-4"
+				}
+			>
+				<div className="flex flex-col gap-8">
+					<button
+						type="button"
+						onClick={() => setModal(false)}
+						className="self-end"
+					>
+						<AiOutlineClose className="text-blue font-bold w-8 h-8" />
+					</button>
+					<ul className="flex flex-col gap-8 text-lg">
+						{navLinks.slice(1, navLinks.length).map((navLink: INavProps) => (
+							<li key={navLink.name} className="w-full min-h-[2.5rem]">
+								<Link
+									href={navLink.path}
+									onClick={() => setModal(false)}
+									className="text-blue font-medium text-lg"
+								>
+									{navLink.name}
+								</Link>
+							</li>
+						))}
+					</ul>
+					<form action="/auth/signout" method="post">
+						<button
+							className="bg-green p-3 rounded-[0.5rem] cursor-pointer text-white"
+							type="submit"
+						>
+							Sign out
+						</button>
+					</form>
+				</div>
+			</div>
+		</section>
 	);
 };
 

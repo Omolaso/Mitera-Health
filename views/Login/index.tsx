@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AuthForm from "@/components/AuthForm";
@@ -20,21 +20,9 @@ const imagesArr: string[] = [
 const LoginPage = () => {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
-	useEffect(() => {
-		const changeSlideInterval = setTimeout(() => {
-			setCurrentSlide((prevSlide) =>
-				prevSlide === imagesArr.length - 1 ? 0 : prevSlide + 1
-			);
-		}, 20000);
-
-		return () => {
-			clearTimeout(changeSlideInterval);
-		};
-	}, [currentSlide]);
-
 	return (
 		<section className="flex items-stretch justify-center min-h-screen w-full">
-			<div className="flex flex-col md:flex-row items-center justify-between gap-[1rem] md:gap-[5rem] w-full p-4">
+			<div className="flex flex-col md:flex-row items-center justify-between gap-[1rem] md:gap-[3rem] w-full p-4">
 				<div className="self-stretch flex-1 flex flex-col gap-4 items-stretch bg-lightGreen rounded-[0.5rem] p-4">
 					<div
 						style={{
